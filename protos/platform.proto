@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package protos;
+
+service Platform {
+	rpc Fit (stream CorpusRequest) returns (PlatReply) {}
+}
+
+message CorpusRequest {
+	repeated string title = 1;
+	repeated string content = 2;
+}
+
+message PlatReply {
+	string message = 1;
+}

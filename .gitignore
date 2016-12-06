@@ -1,0 +1,5 @@
+# Ignore all swp files
+*.pyc
+*.swo
+*.swp
+*~
