@@ -1,6 +1,7 @@
 from concurrent import futures
 
 import sys
+import copy
 import grpc
 import time
 import getopt
@@ -15,35 +16,48 @@ ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 class Platform(pb.PlatformServicer):
 
-    TIMER_INTERVAL = 20
+    TIMER_INTERVAL = 100
 
     def __init__(self):
-        self._data = []
-        self._timer = RepeatableTimer(Platform.TIMER_INTERVAL, self._collect)
-        self._timer.start()
-        self._lock = threading.Lock()
+        self.data = []
+        self.docDic = {}
 
-        self._model = ExpModel()
+        self.timer = RepeatableTimer(Platform.TIMER_INTERVAL, self._collect)
+        self.timer.start()
+        self.lock = threading.Lock()
+        self.model = ExpModel()
 
     def _collect(self):
-        self._lock.acquire()
-        data = self._data[:]
-        self._data = []
-        self._lock.release()
+        self.lock.acquire()
+        saved_data = self.data[:]
+        del self.data[:]
+        self.lock.release()
 
-        self._model.update(data)
-        self._timer.restart()
+        self.model.Update(saved_data)
+        self.timer.restart()
 
     def Fit(self, request_iterator, context):
-        for doc in request_iterator:
-            self._lock.acquire()
-            self._data.append(doc.content)
-            self._lock.release()
+        for req in request_iterator:
+            self.lock.acquire()
 
-        return pb.PlatReply(message='Plat Finished Fit')
+            self.docDic[len(self.docDic)] = req.hash
+            doc = copy.deepcopy(req.title)
+            for _ in range(10): doc.MergeFrom(req.title)
+            doc.MergeFrom(req.content)
+            self.data.append(doc)
+
+            self.lock.release()
+
+        return pb.PlatReply(message='Goodbye from platform Server')
+
+    def Query(self, request, context):
+        ctx = self.model.Expand(request.keywords)
+        docs = self.model.Seek(ctx) if ctx else []
+
+        return pb.QueryResponse(hashs=[self.docDic[d[0]] for d in docs])
 
 def serve(address):
-    server = grpc.server(futures.ThreadPoolExecutor(max_workers=2))
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
     pb.add_PlatformServicer_to_server(Platform(), server)
     server.add_insecure_port(address)
     server.start()

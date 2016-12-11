@@ -3,12 +3,22 @@ syntax = "proto3";
 package protos;
 
 service Platform {
-	rpc Fit (stream CorpusRequest) returns (PlatReply) {}
+	rpc Fit (stream FitRequest) returns (PlatReply) {}
+  rpc Query (QueryRequest) returns (QueryResponse) {}
 }
 
-message CorpusRequest {
-	repeated string title = 1;
-	repeated string content = 2;
+message FitRequest {
+	string hash = 1;
+	repeated string title = 2;
+	repeated string content = 3;
+}
+
+message QueryRequest {
+  repeated string keywords = 1;
+}
+
+message QueryResponse {
+  repeated string hashs = 1;
 }
 
 message PlatReply {

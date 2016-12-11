@@ -19,30 +19,37 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='platform.proto',
   package='protos',
   syntax='proto3',
-  serialized_pb=_b('\n\x0eplatform.proto\x12\x06protos\"/\n\rCorpusRequest\x12\r\n\x05title\x18\x01 \x03(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x03(\t\"\x1c\n\tPlatReply\x12\x0f\n\x07message\x18\x01 \x01(\t2?\n\x08Platform\x12\x33\n\x03\x46it\x12\x15.protos.CorpusRequest\x1a\x11.protos.PlatReply\"\x00(\x01\x62\x06proto3')
+  serialized_pb=_b('\n\x0eplatform.proto\x12\x06protos\":\n\nFitRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x03(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x03(\t\" \n\x0cQueryRequest\x12\x10\n\x08keywords\x18\x01 \x03(\t\"\x1e\n\rQueryResponse\x12\r\n\x05hashs\x18\x01 \x03(\t\"\x1c\n\tPlatReply\x12\x0f\n\x07message\x18\x01 \x01(\t2t\n\x08Platform\x12\x30\n\x03\x46it\x12\x12.protos.FitRequest\x1a\x11.protos.PlatReply\"\x00(\x01\x12\x36\n\x05Query\x12\x14.protos.QueryRequest\x1a\x15.protos.QueryResponse\"\x00\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
 
-_CORPUSREQUEST = _descriptor.Descriptor(
-  name='CorpusRequest',
-  full_name='protos.CorpusRequest',
+_FITREQUEST = _descriptor.Descriptor(
+  name='FitRequest',
+  full_name='protos.FitRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='title', full_name='protos.CorpusRequest.title', index=0,
-      number=1, type=9, cpp_type=9, label=3,
+      name='hash', full_name='protos.FitRequest.hash', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=_b("").decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='title', full_name='protos.FitRequest.title', index=1,
+      number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='content', full_name='protos.CorpusRequest.content', index=1,
-      number=2, type=9, cpp_type=9, label=3,
+      name='content', full_name='protos.FitRequest.content', index=2,
+      number=3, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -60,7 +67,69 @@ _CORPUSREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=26,
-  serialized_end=73,
+  serialized_end=84,
+)
+
+
+_QUERYREQUEST = _descriptor.Descriptor(
+  name='QueryRequest',
+  full_name='protos.QueryRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='keywords', full_name='protos.QueryRequest.keywords', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=86,
+  serialized_end=118,
+)
+
+
+_QUERYRESPONSE = _descriptor.Descriptor(
+  name='QueryResponse',
+  full_name='protos.QueryResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='hashs', full_name='protos.QueryResponse.hashs', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=120,
+  serialized_end=150,
 )
 
 
@@ -90,19 +159,35 @@ _PLATREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=75,
-  serialized_end=103,
+  serialized_start=152,
+  serialized_end=180,
 )
 
-DESCRIPTOR.message_types_by_name['CorpusRequest'] = _CORPUSREQUEST
+DESCRIPTOR.message_types_by_name['FitRequest'] = _FITREQUEST
+DESCRIPTOR.message_types_by_name['QueryRequest'] = _QUERYREQUEST
+DESCRIPTOR.message_types_by_name['QueryResponse'] = _QUERYRESPONSE
 DESCRIPTOR.message_types_by_name['PlatReply'] = _PLATREPLY
 
-CorpusRequest = _reflection.GeneratedProtocolMessageType('CorpusRequest', (_message.Message,), dict(
-  DESCRIPTOR = _CORPUSREQUEST,
+FitRequest = _reflection.GeneratedProtocolMessageType('FitRequest', (_message.Message,), dict(
+  DESCRIPTOR = _FITREQUEST,
   __module__ = 'platform_pb2'
-  # @@protoc_insertion_point(class_scope:protos.CorpusRequest)
+  # @@protoc_insertion_point(class_scope:protos.FitRequest)
   ))
-_sym_db.RegisterMessage(CorpusRequest)
+_sym_db.RegisterMessage(FitRequest)
+
+QueryRequest = _reflection.GeneratedProtocolMessageType('QueryRequest', (_message.Message,), dict(
+  DESCRIPTOR = _QUERYREQUEST,
+  __module__ = 'platform_pb2'
+  # @@protoc_insertion_point(class_scope:protos.QueryRequest)
+  ))
+_sym_db.RegisterMessage(QueryRequest)
+
+QueryResponse = _reflection.GeneratedProtocolMessageType('QueryResponse', (_message.Message,), dict(
+  DESCRIPTOR = _QUERYRESPONSE,
+  __module__ = 'platform_pb2'
+  # @@protoc_insertion_point(class_scope:protos.QueryResponse)
+  ))
+_sym_db.RegisterMessage(QueryResponse)
 
 PlatReply = _reflection.GeneratedProtocolMessageType('PlatReply', (_message.Message,), dict(
   DESCRIPTOR = _PLATREPLY,
@@ -129,8 +214,13 @@ class PlatformStub(object):
     """
     self.Fit = channel.stream_unary(
         '/protos.Platform/Fit',
-        request_serializer=CorpusRequest.SerializeToString,
+        request_serializer=FitRequest.SerializeToString,
         response_deserializer=PlatReply.FromString,
+        )
+    self.Query = channel.unary_unary(
+        '/protos.Platform/Query',
+        request_serializer=QueryRequest.SerializeToString,
+        response_deserializer=QueryResponse.FromString,
         )
 
 
@@ -141,13 +231,23 @@ class PlatformServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Query(self, request, context):
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_PlatformServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'Fit': grpc.stream_unary_rpc_method_handler(
           servicer.Fit,
-          request_deserializer=CorpusRequest.FromString,
+          request_deserializer=FitRequest.FromString,
           response_serializer=PlatReply.SerializeToString,
+      ),
+      'Query': grpc.unary_unary_rpc_method_handler(
+          servicer.Query,
+          request_deserializer=QueryRequest.FromString,
+          response_serializer=QueryResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
@@ -163,6 +263,8 @@ class BetaPlatformServicer(object):
   only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0."""
   def Fit(self, request_iterator, context):
     context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+  def Query(self, request, context):
+    context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
 
 
 class BetaPlatformStub(object):
@@ -174,6 +276,9 @@ class BetaPlatformStub(object):
   def Fit(self, request_iterator, timeout, metadata=None, with_call=False, protocol_options=None):
     raise NotImplementedError()
   Fit.future = None
+  def Query(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+    raise NotImplementedError()
+  Query.future = None
 
 
 def beta_create_Platform_server(servicer, pool=None, pool_size=None, default_timeout=None, maximum_timeout=None):
@@ -183,13 +288,16 @@ def beta_create_Platform_server(servicer, pool=None, pool_size=None, default_tim
   file not marked beta) for all further purposes. This function was
   generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
   request_deserializers = {
-    ('protos.Platform', 'Fit'): CorpusRequest.FromString,
+    ('protos.Platform', 'Fit'): FitRequest.FromString,
+    ('protos.Platform', 'Query'): QueryRequest.FromString,
   }
   response_serializers = {
     ('protos.Platform', 'Fit'): PlatReply.SerializeToString,
+    ('protos.Platform', 'Query'): QueryResponse.SerializeToString,
   }
   method_implementations = {
     ('protos.Platform', 'Fit'): face_utilities.stream_unary_inline(servicer.Fit),
+    ('protos.Platform', 'Query'): face_utilities.unary_unary_inline(servicer.Query),
   }
   server_options = beta_implementations.server_options(request_deserializers=request_deserializers, response_serializers=response_serializers, thread_pool=pool, thread_pool_size=pool_size, default_timeout=default_timeout, maximum_timeout=maximum_timeout)
   return beta_implementations.server(method_implementations, options=server_options)
@@ -202,13 +310,16 @@ def beta_create_Platform_stub(channel, host=None, metadata_transformer=None, poo
   file not marked beta) for all further purposes. This function was
   generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
   request_serializers = {
-    ('protos.Platform', 'Fit'): CorpusRequest.SerializeToString,
+    ('protos.Platform', 'Fit'): FitRequest.SerializeToString,
+    ('protos.Platform', 'Query'): QueryRequest.SerializeToString,
   }
   response_deserializers = {
     ('protos.Platform', 'Fit'): PlatReply.FromString,
+    ('protos.Platform', 'Query'): QueryResponse.FromString,
   }
   cardinalities = {
     'Fit': cardinality.Cardinality.STREAM_UNARY,
+    'Query': cardinality.Cardinality.UNARY_UNARY,
   }
   stub_options = beta_implementations.stub_options(host=host, metadata_transformer=metadata_transformer, request_serializers=request_serializers, response_deserializers=response_deserializers, thread_pool=pool, thread_pool_size=pool_size)
   return beta_implementations.dynamic_stub(channel, 'protos.Platform', cardinalities, options=stub_options)
