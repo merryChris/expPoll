@@ -3,24 +3,36 @@ syntax = "proto3";
 package protos;
 
 service Platform {
-	rpc Fit (stream FitRequest) returns (PlatReply) {}
-  rpc Query (QueryRequest) returns (QueryResponse) {}
+	rpc Fit (stream FitRequest) returns (CommonResponse) {}
+	rpc Filter (FilterRequest) returns (FilterResponse) {}
+	rpc Query (QueryRequest) returns (QueryResponse) {}
 }
 
 message FitRequest {
-	string hash = 1;
-	repeated string title = 2;
-	repeated string content = 3;
+	repeated string title = 1;
+	repeated string content = 2;
+}
+
+message FilterRequest {
+	repeated string tokens = 1;
 }
 
 message QueryRequest {
-  repeated string keywords = 1;
+	repeated string keywords = 1;
+}
+
+message CommonResponse {
+	int32 code = 1;
+	string message = 2;
+}
+
+message FilterResponse {
+	int32 code = 1;
+	repeated string tokens = 2;
 }
 
 message QueryResponse {
-  repeated string hashs = 1;
-}
-
-message PlatReply {
-	string message = 1;
+	int32 code = 1;
+	repeated string keywords = 2;
+	repeated float probabilities = 3;
 }

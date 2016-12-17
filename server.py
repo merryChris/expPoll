@@ -16,16 +16,15 @@ ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 class Platform(pb.PlatformServicer):
 
-    TIMER_INTERVAL = 100
+    TIMER_INTERVAL = 200
 
-    def __init__(self):
+    def __init__(self, cool=True):
         self.data = []
-        self.docDic = {}
 
         self.timer = RepeatableTimer(Platform.TIMER_INTERVAL, self._collect)
         self.timer.start()
         self.lock = threading.Lock()
-        self.model = ExpModel()
+        self.model = ExpModel(not cool)
 
     def _collect(self):
         self.lock.acquire()
@@ -40,7 +39,6 @@ class Platform(pb.PlatformServicer):
         for req in request_iterator:
             self.lock.acquire()
 
-            self.docDic[len(self.docDic)] = req.hash
             doc = copy.deepcopy(req.title)
             for _ in range(10): doc.MergeFrom(req.title)
             doc.MergeFrom(req.content)
@@ -48,17 +46,27 @@ class Platform(pb.PlatformServicer):
 
             self.lock.release()
 
-        return pb.PlatReply(message='Goodbye from platform Server')
+        return pb.CommonResponse(code=0, message='Goodbye from platform Server')
+
+    def Filter(self, request, context):
+        ready, res = self.model.Pick(request.tokens)
+        if not ready: return pb.FilterResponse(code=1, tokens=[])
+
+        return pb.FilterResponse(code=0, tokens=res)
 
     def Query(self, request, context):
-        ctx = self.model.Expand(request.keywords)
-        docs = self.model.Seek(ctx) if ctx else []
+        ready, ctx = self.model.Expand(request.keywords)
+        if not ready: return pb.QueryResponse(code=1, keywords=[], probabilities=[])
 
-        return pb.QueryResponse(hashs=[self.docDic[d[0]] for d in docs])
+        k, p = [None]*len(ctx), [None]*len(ctx)
+        for i in range(len(ctx)):
+            k[i], p[i] = ctx[i]
 
-def serve(address):
+        return pb.QueryResponse(code=0, keywords=k, probabilities=p)
+
+def serve(address, cool=True):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=4))
-    pb.add_PlatformServicer_to_server(Platform(), server)
+    pb.add_PlatformServicer_to_server(Platform(cool), server)
     server.add_insecure_port(address)
     server.start()
 
@@ -69,10 +77,12 @@ def serve(address):
         server.stop(0)
 
 if __name__ == '__main__':
-    opts, _ = getopt.getopt(sys.argv[1:], '', ['address='])
-    address = None
+    opts, _ = getopt.getopt(sys.argv[1:], '', ['address=', 'cool='])
+    address, cool = None, True
     for opt, val in opts:
         if opt == '--address':
             address = val
+        if opt == '--cool':
+            cool = val == 'True' and True or False
 
-    if address: serve(address)
+    if address: serve(address, cool)

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='platform.proto',
   package='protos',
   syntax='proto3',
-  serialized_pb=_b('\n\x0eplatform.proto\x12\x06protos\":\n\nFitRequest\x12\x0c\n\x04hash\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x03(\t\x12\x0f\n\x07\x63ontent\x18\x03 \x03(\t\" \n\x0cQueryRequest\x12\x10\n\x08keywords\x18\x01 \x03(\t\"\x1e\n\rQueryResponse\x12\r\n\x05hashs\x18\x01 \x03(\t\"\x1c\n\tPlatReply\x12\x0f\n\x07message\x18\x01 \x01(\t2t\n\x08Platform\x12\x30\n\x03\x46it\x12\x12.protos.FitRequest\x1a\x11.protos.PlatReply\"\x00(\x01\x12\x36\n\x05Query\x12\x14.protos.QueryRequest\x1a\x15.protos.QueryResponse\"\x00\x62\x06proto3')
+  serialized_pb=_b('\n\x0eplatform.proto\x12\x06protos\",\n\nFitRequest\x12\r\n\x05title\x18\x01 \x03(\t\x12\x0f\n\x07\x63ontent\x18\x02 \x03(\t\"\x1f\n\rFilterRequest\x12\x0e\n\x06tokens\x18\x01 \x03(\t\" \n\x0cQueryRequest\x12\x10\n\x08keywords\x18\x01 \x03(\t\"/\n\x0e\x43ommonResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0f\n\x07message\x18\x02 \x01(\t\".\n\x0e\x46ilterResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x0e\n\x06tokens\x18\x02 \x03(\t\"F\n\rQueryResponse\x12\x0c\n\x04\x63ode\x18\x01 \x01(\x05\x12\x10\n\x08keywords\x18\x02 \x03(\t\x12\x15\n\rprobabilities\x18\x03 \x03(\x02\x32\xb4\x01\n\x08Platform\x12\x35\n\x03\x46it\x12\x12.protos.FitRequest\x1a\x16.protos.CommonResponse\"\x00(\x01\x12\x39\n\x06\x46ilter\x12\x15.protos.FilterRequest\x1a\x16.protos.FilterResponse\"\x00\x12\x36\n\x05Query\x12\x14.protos.QueryRequest\x1a\x15.protos.QueryResponse\"\x00\x62\x06proto3')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
@@ -34,22 +34,15 @@ _FITREQUEST = _descriptor.Descriptor(
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='hash', full_name='protos.FitRequest.hash', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=_b("").decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    _descriptor.FieldDescriptor(
-      name='title', full_name='protos.FitRequest.title', index=1,
-      number=2, type=9, cpp_type=9, label=3,
+      name='title', full_name='protos.FitRequest.title', index=0,
+      number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='content', full_name='protos.FitRequest.content', index=2,
-      number=3, type=9, cpp_type=9, label=3,
+      name='content', full_name='protos.FitRequest.content', index=1,
+      number=2, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -67,7 +60,38 @@ _FITREQUEST = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=26,
-  serialized_end=84,
+  serialized_end=70,
+)
+
+
+_FILTERREQUEST = _descriptor.Descriptor(
+  name='FilterRequest',
+  full_name='protos.FilterRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='tokens', full_name='protos.FilterRequest.tokens', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=72,
+  serialized_end=103,
 )
 
 
@@ -97,52 +121,28 @@ _QUERYREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=86,
-  serialized_end=118,
+  serialized_start=105,
+  serialized_end=137,
 )
 
 
-_QUERYRESPONSE = _descriptor.Descriptor(
-  name='QueryResponse',
-  full_name='protos.QueryResponse',
+_COMMONRESPONSE = _descriptor.Descriptor(
+  name='CommonResponse',
+  full_name='protos.CommonResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='hashs', full_name='protos.QueryResponse.hashs', index=0,
-      number=1, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
+      name='code', full_name='protos.CommonResponse.code', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=120,
-  serialized_end=150,
-)
-
-
-_PLATREPLY = _descriptor.Descriptor(
-  name='PlatReply',
-  full_name='protos.PlatReply',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='message', full_name='protos.PlatReply.message', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='message', full_name='protos.CommonResponse.message', index=1,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -159,14 +159,99 @@ _PLATREPLY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=152,
-  serialized_end=180,
+  serialized_start=139,
+  serialized_end=186,
+)
+
+
+_FILTERRESPONSE = _descriptor.Descriptor(
+  name='FilterResponse',
+  full_name='protos.FilterResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='code', full_name='protos.FilterResponse.code', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='tokens', full_name='protos.FilterResponse.tokens', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=188,
+  serialized_end=234,
+)
+
+
+_QUERYRESPONSE = _descriptor.Descriptor(
+  name='QueryResponse',
+  full_name='protos.QueryResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='code', full_name='protos.QueryResponse.code', index=0,
+      number=1, type=5, cpp_type=1, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='keywords', full_name='protos.QueryResponse.keywords', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='probabilities', full_name='protos.QueryResponse.probabilities', index=2,
+      number=3, type=2, cpp_type=6, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=236,
+  serialized_end=306,
 )
 
 DESCRIPTOR.message_types_by_name['FitRequest'] = _FITREQUEST
+DESCRIPTOR.message_types_by_name['FilterRequest'] = _FILTERREQUEST
 DESCRIPTOR.message_types_by_name['QueryRequest'] = _QUERYREQUEST
+DESCRIPTOR.message_types_by_name['CommonResponse'] = _COMMONRESPONSE
+DESCRIPTOR.message_types_by_name['FilterResponse'] = _FILTERRESPONSE
 DESCRIPTOR.message_types_by_name['QueryResponse'] = _QUERYRESPONSE
-DESCRIPTOR.message_types_by_name['PlatReply'] = _PLATREPLY
 
 FitRequest = _reflection.GeneratedProtocolMessageType('FitRequest', (_message.Message,), dict(
   DESCRIPTOR = _FITREQUEST,
@@ -175,6 +260,13 @@ FitRequest = _reflection.GeneratedProtocolMessageType('FitRequest', (_message.Me
   ))
 _sym_db.RegisterMessage(FitRequest)
 
+FilterRequest = _reflection.GeneratedProtocolMessageType('FilterRequest', (_message.Message,), dict(
+  DESCRIPTOR = _FILTERREQUEST,
+  __module__ = 'platform_pb2'
+  # @@protoc_insertion_point(class_scope:protos.FilterRequest)
+  ))
+_sym_db.RegisterMessage(FilterRequest)
+
 QueryRequest = _reflection.GeneratedProtocolMessageType('QueryRequest', (_message.Message,), dict(
   DESCRIPTOR = _QUERYREQUEST,
   __module__ = 'platform_pb2'
@@ -182,19 +274,26 @@ QueryRequest = _reflection.GeneratedProtocolMessageType('QueryRequest', (_messag
   ))
 _sym_db.RegisterMessage(QueryRequest)
 
+CommonResponse = _reflection.GeneratedProtocolMessageType('CommonResponse', (_message.Message,), dict(
+  DESCRIPTOR = _COMMONRESPONSE,
+  __module__ = 'platform_pb2'
+  # @@protoc_insertion_point(class_scope:protos.CommonResponse)
+  ))
+_sym_db.RegisterMessage(CommonResponse)
+
+FilterResponse = _reflection.GeneratedProtocolMessageType('FilterResponse', (_message.Message,), dict(
+  DESCRIPTOR = _FILTERRESPONSE,
+  __module__ = 'platform_pb2'
+  # @@protoc_insertion_point(class_scope:protos.FilterResponse)
+  ))
+_sym_db.RegisterMessage(FilterResponse)
+
 QueryResponse = _reflection.GeneratedProtocolMessageType('QueryResponse', (_message.Message,), dict(
   DESCRIPTOR = _QUERYRESPONSE,
   __module__ = 'platform_pb2'
   # @@protoc_insertion_point(class_scope:protos.QueryResponse)
   ))
 _sym_db.RegisterMessage(QueryResponse)
-
-PlatReply = _reflection.GeneratedProtocolMessageType('PlatReply', (_message.Message,), dict(
-  DESCRIPTOR = _PLATREPLY,
-  __module__ = 'platform_pb2'
-  # @@protoc_insertion_point(class_scope:protos.PlatReply)
-  ))
-_sym_db.RegisterMessage(PlatReply)
 
 
 import grpc
@@ -215,7 +314,12 @@ class PlatformStub(object):
     self.Fit = channel.stream_unary(
         '/protos.Platform/Fit',
         request_serializer=FitRequest.SerializeToString,
-        response_deserializer=PlatReply.FromString,
+        response_deserializer=CommonResponse.FromString,
+        )
+    self.Filter = channel.unary_unary(
+        '/protos.Platform/Filter',
+        request_serializer=FilterRequest.SerializeToString,
+        response_deserializer=FilterResponse.FromString,
         )
     self.Query = channel.unary_unary(
         '/protos.Platform/Query',
@@ -231,6 +335,11 @@ class PlatformServicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def Filter(self, request, context):
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def Query(self, request, context):
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -242,7 +351,12 @@ def add_PlatformServicer_to_server(servicer, server):
       'Fit': grpc.stream_unary_rpc_method_handler(
           servicer.Fit,
           request_deserializer=FitRequest.FromString,
-          response_serializer=PlatReply.SerializeToString,
+          response_serializer=CommonResponse.SerializeToString,
+      ),
+      'Filter': grpc.unary_unary_rpc_method_handler(
+          servicer.Filter,
+          request_deserializer=FilterRequest.FromString,
+          response_serializer=FilterResponse.SerializeToString,
       ),
       'Query': grpc.unary_unary_rpc_method_handler(
           servicer.Query,
@@ -263,6 +377,8 @@ class BetaPlatformServicer(object):
   only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0."""
   def Fit(self, request_iterator, context):
     context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
+  def Filter(self, request, context):
+    context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
   def Query(self, request, context):
     context.code(beta_interfaces.StatusCode.UNIMPLEMENTED)
 
@@ -276,6 +392,9 @@ class BetaPlatformStub(object):
   def Fit(self, request_iterator, timeout, metadata=None, with_call=False, protocol_options=None):
     raise NotImplementedError()
   Fit.future = None
+  def Filter(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
+    raise NotImplementedError()
+  Filter.future = None
   def Query(self, request, timeout, metadata=None, with_call=False, protocol_options=None):
     raise NotImplementedError()
   Query.future = None
@@ -288,14 +407,17 @@ def beta_create_Platform_server(servicer, pool=None, pool_size=None, default_tim
   file not marked beta) for all further purposes. This function was
   generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
   request_deserializers = {
+    ('protos.Platform', 'Filter'): FilterRequest.FromString,
     ('protos.Platform', 'Fit'): FitRequest.FromString,
     ('protos.Platform', 'Query'): QueryRequest.FromString,
   }
   response_serializers = {
-    ('protos.Platform', 'Fit'): PlatReply.SerializeToString,
+    ('protos.Platform', 'Filter'): FilterResponse.SerializeToString,
+    ('protos.Platform', 'Fit'): CommonResponse.SerializeToString,
     ('protos.Platform', 'Query'): QueryResponse.SerializeToString,
   }
   method_implementations = {
+    ('protos.Platform', 'Filter'): face_utilities.unary_unary_inline(servicer.Filter),
     ('protos.Platform', 'Fit'): face_utilities.stream_unary_inline(servicer.Fit),
     ('protos.Platform', 'Query'): face_utilities.unary_unary_inline(servicer.Query),
   }
@@ -310,14 +432,17 @@ def beta_create_Platform_stub(channel, host=None, metadata_transformer=None, poo
   file not marked beta) for all further purposes. This function was
   generated only to ease transition from grpcio<0.15.0 to grpcio>=0.15.0"""
   request_serializers = {
+    ('protos.Platform', 'Filter'): FilterRequest.SerializeToString,
     ('protos.Platform', 'Fit'): FitRequest.SerializeToString,
     ('protos.Platform', 'Query'): QueryRequest.SerializeToString,
   }
   response_deserializers = {
-    ('protos.Platform', 'Fit'): PlatReply.FromString,
+    ('protos.Platform', 'Filter'): FilterResponse.FromString,
+    ('protos.Platform', 'Fit'): CommonResponse.FromString,
     ('protos.Platform', 'Query'): QueryResponse.FromString,
   }
   cardinalities = {
+    'Filter': cardinality.Cardinality.UNARY_UNARY,
     'Fit': cardinality.Cardinality.STREAM_UNARY,
     'Query': cardinality.Cardinality.UNARY_UNARY,
   }
